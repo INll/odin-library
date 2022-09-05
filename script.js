@@ -8,7 +8,37 @@ const overlay = document.querySelector('div.overlay');
 const readButtons = document.querySelectorAll('[data-read-button]');
 const deleteButtons = document.querySelectorAll('[data-delete-button]');
 
+const imageButton = document.querySelector('[data-image-selection');
 
+// Disable Choose File button as it's not supported atm
+imageButton.addEventListener('click', e => {
+  e.preventDefault();
+})
+
+// Read form input and add newly constructed object into library
+const form = document.querySelector('[data-popup-form]');
+form.addEventListener('submit', e => {
+  // readFormData(e);
+  const title = document.getElementById(title).value;
+  const author = document.getElementById(author).value;
+  const noOfPages = document.getElementById(pageNo).value;
+  const abstract = document.getElementById(author).value;
+  const read = document.getElementById(confirmRead).value;
+  const newBookObject = new Book(title, author, noOfPages, abstract, read);
+  addBookToLibrary(newBookObject);
+  e.preventDefault();
+})
+
+// The idea is to first select all buttons that can open a popup, which are
+// identified with the data- attribute. 
+
+// Then, loop though them using .forEach() and attach an eventListener and
+// listen for click events.
+
+// When a click happens, read the button-target data attribute which stors
+// the id of the popup element. 
+
+// Finally, pass its id to openPopup() to add an 'active' class to activate.
 
 openPopupButtons.forEach(button => {
   button.addEventListener('click', () => {
@@ -30,7 +60,6 @@ overlay.addEventListener('click', () => {
     closePopup(thePopup);
   } return;
 })
-
 
 // Add '.read' class to closest card
 readButtons.forEach(button => {
@@ -62,15 +91,20 @@ function tagHandle(cardItem) {
   }
 }
 
+// Get ADD A BOOK popup form data after submission
+
 let myLibrary = [];
 
-function Book(title, author, date, abstract) {
+function Book(title, author, page, date, abstract, read) {
   this.title = title
   this.author = author
+  this.page = page
   this.date = date
   this.abstract = abstract
+  this.read = read
 }
 
-// function addBookToLibrary() {
-//   return;
-// }
+function addBookToLibrary(newBookObject) {
+  myLibrary.push(newBookObject);
+  console.log(myLibrary);
+}

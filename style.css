@@ -139,7 +139,12 @@ html, body {
 }
 
 .book-display-wrapper{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 400px);
+  grid-template-rows: repeat(auto-fill, 450px);
+  justify-content: space-evenly;
   margin: 70px 70px 0 70px;
+  gap: 60px;
 }
 
 .card{
@@ -312,6 +317,11 @@ form > ul > li > label{
   font-family: 'Nunito Sans', sans-serif;
 }
 
+#read-status-text{
+  width: 30px;
+  margin: 0 0 0 40px;
+}
+
 #abstract-heading{
   align-self: start;
 }
@@ -328,6 +338,19 @@ form > ul > li > input{
   padding: 5px 10px;
   border: solid 1px black;
   border-radius: 3px;
+}
+
+input[type="file"]{
+  border: 0;
+  padding: 3px 0;
+}
+
+label[for="image"]::after{
+  content: '(To Be Supported)';
+  display: block;
+  font-size: 11px;
+  font-weight: 900;
+  color: grey;
 }
 
 /* Date input does not need flew-grow */
