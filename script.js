@@ -15,18 +15,57 @@ imageButton.addEventListener('click', e => {
   e.preventDefault();
 })
 
+let myLibrary = [];
+
+function Book(title, author, page, date, abstract, read) {
+  this.title = title
+  this.author = author
+  this.page = page
+  this.date = date
+  this.abstract = abstract
+  this.read = read
+}
+
+function addBookToLibrary(newBookObject) {
+  myLibrary.push(newBookObject);
+  console.log(myLibrary);
+}
+
+// Reload once a book has been added or deleted
+function reloadLibrary(){
+
+}
+
 // Read form input and add newly constructed object into library
+// then clear inputs and close popup
 const form = document.querySelector('[data-popup-form]');
 form.addEventListener('submit', e => {
-  // readFormData(e);
-  const title = document.getElementById(title).value;
-  const author = document.getElementById(author).value;
-  const noOfPages = document.getElementById(pageNo).value;
-  const abstract = document.getElementById(author).value;
-  const read = document.getElementById(confirmRead).value;
-  const newBookObject = new Book(title, author, noOfPages, abstract, read);
-  addBookToLibrary(newBookObject);
   e.preventDefault();
+  // File upload is not supported hence it does not have the data-is-valid-input attribute in index.html
+  const inputs = document.querySelectorAll('[data-popup-form]>ul>li>[data-is-valid-input]');
+  let formData = [];
+  inputs.forEach(input => {
+    if(input.type == 'checkbox') {
+        formData.push(input.checked);
+      } else {
+        formData.push(input.value);
+      }
+      // Use spread operator below to pass formData as parameters into constructor
+      const newBookObject = 
+    }
+  )
+
+  // const title = document.getElementById('title').value;
+  // const author = document.getElementById('author').value;
+  // const noOfPages = document.getElementById('pageNo').value;
+  // const date = document.getElementById('date').value;
+  // const abstract = document.getElementById('abstract-textarea').value;
+  // const read = document.getElementById('confirmRead').checked;
+  // const newBookObject = new Book(title, author, noOfPages, date, abstract, read);
+  // addBookToLibrary(newBookObject);
+  // const card = form.closest('#popup');
+  closePopup(card);
+  document.querySelector('[data-popup-form').reset();
 })
 
 // The idea is to first select all buttons that can open a popup, which are
@@ -92,19 +131,3 @@ function tagHandle(cardItem) {
 }
 
 // Get ADD A BOOK popup form data after submission
-
-let myLibrary = [];
-
-function Book(title, author, page, date, abstract, read) {
-  this.title = title
-  this.author = author
-  this.page = page
-  this.date = date
-  this.abstract = abstract
-  this.read = read
-}
-
-function addBookToLibrary(newBookObject) {
-  myLibrary.push(newBookObject);
-  console.log(myLibrary);
-}
