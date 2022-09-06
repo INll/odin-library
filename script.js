@@ -28,7 +28,6 @@ function Book(title, author, page, date, abstract, read) {
 
 function addBookToLibrary(newBookObject) {
   myLibrary.push(newBookObject);
-  console.log(myLibrary);
 }
 
 // Reload once a book has been added or deleted
@@ -44,16 +43,20 @@ form.addEventListener('submit', e => {
   // File upload is not supported hence it does not have the data-is-valid-input attribute in index.html
   const inputs = document.querySelectorAll('[data-popup-form]>ul>li>[data-is-valid-input]');
   let formData = [];
+  // For each form input, read its value and push into formData
   inputs.forEach(input => {
     if(input.type == 'checkbox') {
         formData.push(input.checked);
       } else {
         formData.push(input.value);
       }
-      // Use spread operator below to pass formData as parameters into constructor
-      const newBookObject = 
     }
   )
+  // Since formData is structually identical to the required input arguments of the constructor
+  // spread operator can be used to easily pass formData into Book
+  const newBookObject = new Book(...formData);
+  addBookToLibrary(newBookObject);
+  })
 
   // const title = document.getElementById('title').value;
   // const author = document.getElementById('author').value;
@@ -64,9 +67,9 @@ form.addEventListener('submit', e => {
   // const newBookObject = new Book(title, author, noOfPages, date, abstract, read);
   // addBookToLibrary(newBookObject);
   // const card = form.closest('#popup');
-  closePopup(card);
-  document.querySelector('[data-popup-form').reset();
-})
+//   closePopup(card);
+//   document.querySelector('[data-popup-form').reset();
+// })
 
 // The idea is to first select all buttons that can open a popup, which are
 // identified with the data- attribute. 
