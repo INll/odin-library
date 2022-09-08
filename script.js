@@ -5,8 +5,8 @@ const closePopupButtons = document.querySelectorAll('[data-close-button]');
 const thePopup = document.querySelector('#popup');
 const overlay = document.querySelector('div.overlay');
 
-const readButtons = document.querySelectorAll('[data-read-button]');
-const deleteButtons = document.querySelectorAll('[data-delete-button]');
+let readButtons = document.querySelectorAll('[data-read-button]');
+let deleteButtons = document.querySelectorAll('[data-delete-button]');
 
 const imageButton = document.querySelector('[data-image-selection');
 
@@ -17,13 +17,13 @@ imageButton.addEventListener('click', e => {
 
 let myLibrary = [];
 
-function Book(title, author, page, date, abstract, read) {
+function Book(title, author, page, date, read, abstract) {
   this.title = title
   this.author = author
   this.page = page
   this.date = date
-  this.abstract = abstract
   this.read = read
+  this.abstract = abstract
 }
 
 function addBookToLibrary(newBookObject) {
@@ -31,9 +31,93 @@ function addBookToLibrary(newBookObject) {
 }
 
 // Reload once a book has been added or deleted
-function reloadLibrary(){
+// For each book, check if myLibrary[index].read is congurous with read status
+function refreshLibrary(){
+  myLibrary.forEach(book => {
+    // Get last object in myLibrary
 
+    // Render and add card HTML elements with object values
+  })
+  // Compare
 }
+
+// Delete book in myLibrary based on given index
+function deleteBook(index){
+  myLibrary.splice(index, 1);
+}             
+
+// Return book index in myLibrary based on given book name
+function findBook(bookName){
+  const isMatchedBookName = (e) => e == bookName; // Testing function, checks if looped e has same name
+  return myLibrary.findIndex(isMatchedBookName);
+}
+
+function toggleRead(index){
+  if (myLibrary[index].read == false){
+    myLibrary[index].read = true;
+  } else {
+    myLibrary[index].read = false;
+  } // Look for title tag and traverse to (un)toggle READ UI element
+  const titleTag = document
+}
+
+// Parse and add new book details to replace placeholders in a hidden card template, then clone and append it
+function addNewBookToHTML(formData){
+  // Only template is wrapped in a original-template wrapper
+  const cardTemplate = document.querySelector('.original-template-wrapper>[data-template-parentNode]');
+  const mainDisplayWrapper = document.querySelector('.main-display-wrapper');
+  // Select all .placeholders the template
+  const cardTemplateDetails = document.querySelectorAll('.original-template-wrapper .placeholder');
+  // For each of the .placeholder, change its innerText to each of the placeholder in formData
+  cardTemplateDetails.forEach((placeholderElement, index) => {
+    const info = formData[index];
+    // Except for read? value
+    if (info == true || info == false){
+        const card = document.querySelector('.original-template-wrapper [data-book-card]');
+        // Change class to either contain read or do not contain
+        card.className = info ? 'card read' : 'card';
+        return; // Skip to next forEach item
+      }
+    placeholderElement.innerHTML = info;
+  })
+  mainDisplayWrapper.append(cardTemplate.cloneNode(true));
+  // Update nodeList containing all read and delete buttons
+  readButtons = document.querySelectorAll('[data-read-button]');
+  deleteButtons = document.querySelectorAll('[data-delete-button]');
+  prepareNewButtons(readButtons, deleteButtons);
+}
+
+// Refresh nodeLists containing buttons and attach eventListerner to them
+function prepareNewButtons(readButtons, deleteButtons){
+  console.log(readButtons);
+  console.log(deleteButtons);
+  // Handle delete buttons
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', e => {
+      let bookName = e.target.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
+      const cardElement = e.target.parentNode.parentNode.parentNode.parentNode;
+      cardElement.remove();
+      // deleteBook(findBook(bookName));
+    })
+  })
+  // Handle read buttons
+  readButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const card = button.closest('[data-book-card]');
+      toggleReadTag(card);
+      // updateLibraryReadStatus(card);  // Update read status in myLibrary;
+    })
+  })
+}
+
+deleteButtons.forEach(button => {
+  button.addEventListener('click', e => {
+    let bookName = e.target.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
+    const cardElement = e.target.parentNode.parentNode.parentNode.parentNode;
+    cardElement.remove();
+    // deleteBook(findBook(bookName));
+  })
+})
 
 // Read form input and add newly constructed object into library
 // then clear inputs and close popup
@@ -50,26 +134,18 @@ form.addEventListener('submit', e => {
       } else {
         formData.push(input.value);
       }
-    }
-  )
+    })
   // Since formData is structually identical to the required input arguments of the constructor
   // spread operator can be used to easily pass formData into Book
   const newBookObject = new Book(...formData);
   addBookToLibrary(newBookObject);
+  closePopup(form.closest('#popup'));
+  document.querySelector('[data-popup-form').reset();
+  addNewBookToHTML(formData);  
+  // refreshLibrary();  // 
   })
+  
 
-  // const title = document.getElementById('title').value;
-  // const author = document.getElementById('author').value;
-  // const noOfPages = document.getElementById('pageNo').value;
-  // const date = document.getElementById('date').value;
-  // const abstract = document.getElementById('abstract-textarea').value;
-  // const read = document.getElementById('confirmRead').checked;
-  // const newBookObject = new Book(title, author, noOfPages, date, abstract, read);
-  // addBookToLibrary(newBookObject);
-  // const card = form.closest('#popup');
-//   closePopup(card);
-//   document.querySelector('[data-popup-form').reset();
-// })
 
 // The idea is to first select all buttons that can open a popup, which are
 // identified with the data- attribute. 
@@ -81,7 +157,6 @@ form.addEventListener('submit', e => {
 // the id of the popup element. 
 
 // Finally, pass its id to openPopup() to add an 'active' class to activate.
-
 openPopupButtons.forEach(button => {
   button.addEventListener('click', () => {
     const popup = document.querySelector(button.dataset.buttonTarget);
@@ -107,8 +182,8 @@ overlay.addEventListener('click', () => {
 readButtons.forEach(button => {
   button.addEventListener('click', () => {
     const card = button.closest('[data-book-card]');
-    console.log(card);
-    tagHandle(card);
+    toggleReadTag(card);
+    // updateLibraryReadStatus(card);  // Update read status in myLibrary;
   })
 })
 
@@ -124,7 +199,7 @@ function closePopup(popupItem) {
   overlay.classList.remove('active');
 }
 
-function tagHandle(cardItem) {
+function toggleReadTag(cardItem) {
   if (cardItem == null) return;
   else if (cardItem.classList.contains('read')) {
     cardItem.classList.remove('read');

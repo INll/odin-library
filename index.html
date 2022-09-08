@@ -8,7 +8,7 @@
   <title>Local Lib</title>
 </head>
 <body>
-  <div class="add-book-popup-wrapper active" id="popup">
+  <div class="add-book-popup-wrapper" id="popup">
     <div class="popup-heading-wrapper">
       <div class="popup-heading">ADD A BOOK</div>
       <button data-close-button class="close-button">&times;</button>
@@ -72,28 +72,41 @@
           </div>  
         </div>
       </div>
-      <div class="book-display-wrapper">  
-        <div data-book-card class="card read">
-          <div class="title">How to Fail Successfully</div>
-          <div class="read-text">READ</div>
-          <div class="book-details">
-            <img class="cover" src="./cover.jpg" alt="Cover of a book">
-            <div class="details-wrapper">
-              <div class="author detail"><div class="sub-heading">AUTHOR:</div>Tiger</div>
-              <div class="no-of-pages detail"><div class="sub-heading">PAGE:</div>387</div>
-              <div class="publication-date detail"><div class="sub-heading">DATE:</div>Aug 2022</div>
-              <div class="abstract heading">ABSTRACT</div>
-            </div>
-          </div>
-          <div class="abstract-wrapper">
-            From Brandon Stosuy, cofounder of the Creative Independent, an interactive guide to navigating disappointments and finding happy accidents in a creative life, filled with advice from artists across disciplines.
-          </div>
-          <div class="book-buttons">
-            <div class="read-button-wrapper">
-              <input data-read-button type="image" class="read function-buttons" src="./open-book-black.png">
-            </div>
-            <div class="delete-button-wrapper">
-              <input data-delete-button type="image" class="delete function-buttons" src="./bin-black.png">
+      <div class="main-display-wrapper">
+        <div class="original-template-wrapper" style="display:none"> 
+          <div data-template-parentNode class="book-wrapper">
+            <div data-book-card class="card read">
+              <div class="title placeholder">How to Fail Successfully</div>
+              <div class="read-text">READ</div>
+              <div class="book-details">
+                <img class="cover" src="./cover.jpg" alt="Cover of a book">
+                <div class="details-wrapper">
+                  <div class="heading-placeholder-wrapper">
+                    <div class="sub-heading">AUTHOR:</div>
+                    <div class="author detail placeholder">Tiger</div>  
+                  </div>
+                  <div class="heading-placeholder-wrapper">
+                    <div class="sub-heading">PAGE:</div>
+                    <div class="no-of-pages detail placeholder">387</div>
+                  </div>
+                  <div class="heading-placeholder-wrapper">
+                    <div class="sub-heading">DATE:</div>
+                    <div class="publication-date detail placeholder">Aug 2022</div>
+                  </div>
+                  <div class="abstract heading">ABSTRACT</div>
+                </div>
+              </div>
+              <div class="abstract-wrapper placeholder">
+                From Brandon Stosuy, cofounder of the Creative Independent, an interactive guide to navigating disappointments and finding happy accidents in a creative life, filled with advice from artists across disciplines.
+              </div>
+              <div class="book-buttons">
+                <div class="read-button-wrapper">
+                  <input data-read-button type="image" class="read function-buttons" src="./open-book-black.png">
+                </div>
+                <div class="delete-button-wrapper">
+                  <input data-delete-button type="image" class="delete function-buttons" src="./bin-black.png">
+                </div>
+              </div>
             </div>
           </div>
         </div>

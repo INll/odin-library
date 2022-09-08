@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!-- saved from url=(0094)http://10.0.2.15:5500/?title=ada&author=aefw&page_no=234&publication_date=2022-07&abstract=sdf -->
+<html lang="en" style="scroll-behavior: auto;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./Local Lib_files/style.css">
+  <title>Local Lib</title>
+</head>
+<body style="scroll-behavior: auto;">
+  <div class="add-book-popup-wrapper" id="popup">
+    <div class="popup-heading-wrapper">
+      <div class="popup-heading">ADD A BOOK</div>
+      <button data-close-button="" class="close-button">×</button>
+    </div>
+    <div class="popup-form-wrapper">
+      <form action="http://10.0.2.15:5500/" methdo="post" data-popup-form="">
+        <ul>
+          <li>
+            <label for="title">Title:</label>
+            <input data-is-valid-input="" type="text" id="title" name="title" required="" data-com.bitwarden.browser.user-edited="yes">
+          </li>
+          <li>
+            <label for="author">Author:</label>
+            <input data-is-valid-input="" type="text" id="author" name="author" required="" data-com.bitwarden.browser.user-edited="yes">
+          </li>
+          <li>
+            <label for="pageNo">No. of Pages:</label>
+            <input data-is-valid-input="" type="number" id="pageNo" name="page_no" required="" data-com.bitwarden.browser.user-edited="yes">
+          </li>
+          <li>
+            <label for="date">Publication Date:</label>
+            <input data-is-valid-input="" type="month" id="date" name="publication_date" required="" data-com.bitwarden.browser.user-edited="yes">
+            <label for="read-status" id="read-status-text">Read?</label>
+            <input data-is-valid-input="" type="checkbox" id="confirmRead" value="Read?">
+          </li>
+          <li>
+            <label for="abstract" id="abstract-heading">Abstract:</label>
+            <textarea data-is-valid-input="" name="abstract" id="abstract-textarea" cols="39" rows="7" required=""></textarea>
+          </li>
+          <li>
+            <label for="image">Choose a cover:</label>
+            <input type="file" data-image-selection="">
+          </li>
+        </ul>
+        <p class="submit">
+          <button type="submit" value="Add" id="submit-button" class="button-60">Submit</button>
+        </p>
+      </form>
+    </div>
+  </div>
+  <div class="overlay"></div>
+  <div class="body-grid-wrapper">
+    <div class="banner">Local Library App</div>
+    <div class="description-wrapper">
+      <div class="description part-one">USING STORAGE IN YOUR BROWSER</div>
+      <div class="description part-two">CREATED BY &nbsp;<a href="https://github.com/INll"><em class="description part-three">TIGER LEUNG</em></a></div>  
+    </div>
+    <div class="main-body">
+      <div class="main-functions">
+        <div class="button-wrapper">
+          <button class="button-34" data-button-target="#popup" role="button"><div class="button-text">ADD A BOOK</div></button>
+        </div>
+        <div class="stats-wrapper">
+          <div class="stat no-of-books">
+            Books added:&nbsp;
+            <div class="important-number">7</div>
+          </div>
+          <div class="stat read-count">
+            Read:&nbsp;
+            <div class="important-number">3</div>
+          </div>  
+        </div>
+      </div>
+      <div class="book-display-wrapper">  
+        <div data-book-card="" class="card read">
+          <div class="title">How to Fail Successfully</div>
+          <div class="read-text">READ</div>
+          <div class="book-details">
+            <img class="cover" src="./Local Lib_files/cover.jpg" alt="Cover of a book">
+            <div class="details-wrapper">
+              <div class="author detail"><div class="sub-heading">AUTHOR:</div>Tiger</div>
+              <div class="no-of-pages detail"><div class="sub-heading">PAGE:</div>387</div>
+              <div class="publication-date detail"><div class="sub-heading">DATE:</div>Aug 2022</div>
+              <div class="abstract heading">ABSTRACT</div>
+            </div>
+          </div>
+          <div class="abstract-wrapper">
+            From Brandon Stosuy, cofounder of the Creative Independent, an interactive guide to navigating disappointments and finding happy accidents in a creative life, filled with advice from artists across disciplines.
+          </div>
+          <div class="book-buttons">
+            <div class="read-button-wrapper">
+              <input data-read-button="" type="image" class="read function-buttons" src="./Local Lib_files/open-book-black.png">
+            </div>
+            <div class="delete-button-wrapper">
+              <input data-delete-button="" type="image" class="delete function-buttons" src="./Local Lib_files/bin-black.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+<script src="./Local Lib_files/script.js"></script>
+</body></html>

@@ -138,22 +138,13 @@ html, body {
   transform: translateY(2px);
 }
 
-.main-display-wrapper{
+.book-display-wrapper{
   display: grid;
   grid-template-columns: repeat(auto-fill, 400px);
   grid-template-rows: repeat(auto-fill, 450px);
   justify-content: space-evenly;
-}
-
-.book-wrapper{
   margin: 70px 70px 0 70px;
   gap: 60px;
-}
-
-.heading-placeholder-wrapper{
-  display: grid;
-  grid-template-columns: 90px 1fr;
-  align-items: center;
 }
 
 .card{
@@ -209,11 +200,11 @@ html, body {
   margin: 0 0 0 -20px;
 }
 
-/* .detail{
+.detail{
   display: grid;
   grid-template-columns: 90px 1fr;
   align-items: center;
-} */
+}
 
 .sub-heading{
   font-family: 'Nunito Sans', sans-serif;
