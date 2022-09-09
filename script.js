@@ -30,36 +30,36 @@ function addBookToLibrary(newBookObject) {
   myLibrary.push(newBookObject);
 }
 
-// Reload once a book has been added or deleted
-// For each book, check if myLibrary[index].read is congurous with read status
-function refreshLibrary(){
-  myLibrary.forEach(book => {
-    // Get last object in myLibrary
-
-    // Render and add card HTML elements with object values
-  })
-  // Compare
-}
-
 // Delete book in myLibrary based on given index
 function deleteBook(index){
   myLibrary.splice(index, 1);
 }             
 
 // Return book index in myLibrary based on given book name
-function findBook(bookName){
-  const isMatchedBookName = (e) => e == bookName; // Testing function, checks if looped e has same name
-  return myLibrary.findIndex(isMatchedBookName);
+function findBookIndex(bookName){
+  return myLibrary.findIndex((e) => e.title == bookName);
 }
 
-function toggleRead(index){
-  if (myLibrary[index].read == false){
-    myLibrary[index].read = true;
-  } else {
-    myLibrary[index].read = false;
-  } // Look for title tag and traverse to (un)toggle READ UI element
-  const titleTag = document
+// Based on card.classList content, update read property in myLibrary
+function updateLibraryReadStatus(cardElement, bookName){
+  myLibrary[findBookIndex(bookName)].read = cardElement.classList.contains('read') ? true : false;
 }
+
+// Update 'Books added' and 'Read' counters
+function updateCounter(){
+  const bookCounter = document.querySelector('.number-of-books');
+  const readCounter = document.querySelector('.books-read');
+  let counter = 0;
+  myLibrary.forEach(book => {
+    return (book.read == true ? counter++ : null );
+  })
+  bookCounter.innerHTML = myLibrary.length;
+  readCounter.innerHTML = counter;
+}
+
+// const card = document.querySelectorAll('[data-book-card]');
+// card.forEach(e => { console.log(e.classList.contains('read')); });
+// console.log(myLibrary[findBookIndex('fasdfasd')].read);
 
 // Parse and add new book details to replace placeholders in a hidden card template, then clone and append it
 function addNewBookToHTML(formData){
@@ -69,6 +69,7 @@ function addNewBookToHTML(formData){
   // Select all .placeholders the template
   const cardTemplateDetails = document.querySelectorAll('.original-template-wrapper .placeholder');
   // For each of the .placeholder, change its innerText to each of the placeholder in formData
+  console.log(cardTemplateDetails);
   cardTemplateDetails.forEach((placeholderElement, index) => {
     const info = formData[index];
     // Except for read? value
@@ -85,27 +86,29 @@ function addNewBookToHTML(formData){
   readButtons = document.querySelectorAll('[data-read-button]');
   deleteButtons = document.querySelectorAll('[data-delete-button]');
   prepareNewButtons(readButtons, deleteButtons);
+  updateCounter();
 }
 
 // Refresh nodeLists containing buttons and attach eventListerner to them
 function prepareNewButtons(readButtons, deleteButtons){
-  console.log(readButtons);
-  console.log(deleteButtons);
   // Handle delete buttons
   deleteButtons.forEach(button => {
     button.addEventListener('click', e => {
       let bookName = e.target.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
       const cardElement = e.target.parentNode.parentNode.parentNode.parentNode;
       cardElement.remove();
-      // deleteBook(findBook(bookName));
+      deleteBook(findBookIndex(bookName));
+      updateCounter();
     })
   })
   // Handle read buttons
   readButtons.forEach(button => {
     button.addEventListener('click', () => {
       const card = button.closest('[data-book-card]');
+      const bookName = card.childNodes[1].innerHTML;
       toggleReadTag(card);
-      // updateLibraryReadStatus(card);  // Update read status in myLibrary;
+      updateLibraryReadStatus(card, bookName);
+      updateCounter();
     })
   })
 }
@@ -141,12 +144,11 @@ form.addEventListener('submit', e => {
   addBookToLibrary(newBookObject);
   closePopup(form.closest('#popup'));
   document.querySelector('[data-popup-form').reset();
+  console.log(formData);
   addNewBookToHTML(formData);  
   // refreshLibrary();  // 
   })
   
-
-
 // The idea is to first select all buttons that can open a popup, which are
 // identified with the data- attribute. 
 
@@ -183,7 +185,6 @@ readButtons.forEach(button => {
   button.addEventListener('click', () => {
     const card = button.closest('[data-book-card]');
     toggleReadTag(card);
-    // updateLibraryReadStatus(card);  // Update read status in myLibrary;
   })
 })
 
@@ -207,5 +208,3 @@ function toggleReadTag(cardItem) {
     cardItem.classList.add('read');
   }
 }
-
-// Get ADD A BOOK popup form data after submission
