@@ -51,15 +51,11 @@ function updateCounter(){
   const readCounter = document.querySelector('.books-read');
   let counter = 0;
   myLibrary.forEach(book => {
-    return (book.read == true ? counter++ : null );
+    return (book.read == true ? counter++ : null);
   })
   bookCounter.innerHTML = myLibrary.length;
   readCounter.innerHTML = counter;
 }
-
-// const card = document.querySelectorAll('[data-book-card]');
-// card.forEach(e => { console.log(e.classList.contains('read')); });
-// console.log(myLibrary[findBookIndex('fasdfasd')].read);
 
 // Parse and add new book details to replace placeholders in a hidden card template, then clone and append it
 function addNewBookToHTML(formData){

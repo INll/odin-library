@@ -143,12 +143,10 @@ html, body {
   grid-template-columns: repeat(auto-fill, 400px);
   grid-template-rows: repeat(auto-fill, 450px);
   justify-content: space-evenly;
-}
-
-.book-wrapper{
   margin: 70px 70px 0 70px;
   gap: 60px;
 }
+
 
 .heading-placeholder-wrapper{
   display: grid;
