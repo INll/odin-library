@@ -17,14 +17,26 @@ imageButton.addEventListener('click', e => {
 
 let myLibrary = [];
 
-function Book(title, author, page, date, read, abstract) {
-  this.title = title
-  this.author = author
-  this.page = page
-  this.date = date
-  this.read = read
-  this.abstract = abstract
+class Book {
+  constructor(title, author, page, date, read, abstract) {
+    this.title = title;
+    this.author = author;
+    this.page = page;
+    this.date = date;
+    this.read = read;
+    this.abstract = abstract;
+  }
 }
+
+girlInterests = [];
+boyInterests = [];
+girlInterests.forEach((interest, index) => {
+  let counter = 0;
+  if (interest == boyInterest[index]){
+    counter++;
+  }
+  console.log()
+})
 
 function addBookToLibrary(newBookObject) {
   myLibrary.push(newBookObject);
@@ -136,6 +148,7 @@ form.addEventListener('submit', e => {
     })
   // Since formData is structually identical to the required input arguments of the constructor
   // spread operator can be used to easily pass formData into Book
+
   const newBookObject = new Book(...formData);
   addBookToLibrary(newBookObject);
   closePopup(form.closest('#popup'));
